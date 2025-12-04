@@ -24,11 +24,12 @@ export function StatusBar({ mode, processCount = 0 }: StatusBarProps) {
         shortcuts['A'] = 'Kill All';
       }
       shortcuts['R'] = 'Rescan';
+      shortcuts['Esc'] = 'Back';
       shortcuts['Q'] = 'Quit';
       break;
     case 'confirm':
       shortcuts['Y'] = 'Confirm';
-      shortcuts['N'] = 'Cancel';
+      shortcuts['N/Esc'] = 'Cancel';
       break;
   }
 

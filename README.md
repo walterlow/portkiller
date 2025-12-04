@@ -49,6 +49,7 @@ portkiller
 | `Enter` / `K` | Kill selected process |
 | `A` | Kill all processes (when multiple found) |
 | `R` | Rescan current port |
+| `Esc` | Go back |
 | `Q` | Quit |
 | `Y` / `N` | Confirm / Cancel kill |
 
