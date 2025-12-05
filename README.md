@@ -1,16 +1,16 @@
-# portkiller
+# prockiller
 
 Interactive CLI tool to find and kill processes by port. Built with [React Ink](https://github.com/vadimdemedes/ink).
 
-![portkiller demo](https://img.shields.io/npm/v/@walterlow/portkiller?color=orange&style=flat-square)
+![prockiller demo](https://img.shields.io/npm/v/@walterlow/prockiller?color=orange&style=flat-square)
 
 ```
-  ██████╗  ██████╗ ██████╗ ████████╗
-  ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
-  ██████╔╝██║   ██║██████╔╝   ██║
-  ██╔═══╝ ██║   ██║██╔══██╗   ██║
-  ██║     ╚██████╔╝██║  ██║   ██║
-  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝
+  ██████╗ ██████╗  ██████╗  ██████╗
+  ██╔══██╗██╔══██╗██╔═══██╗██╔════╝
+  ██████╔╝██████╔╝██║   ██║██║
+  ██╔═══╝ ██╔══██╗██║   ██║██║
+  ██║     ██║  ██║╚██████╔╝╚██████╗
+  ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝
   ██╗  ██╗██╗██╗     ██╗     ███████╗██████╗
   ██║ ██╔╝██║██║     ██║     ██╔════╝██╔══██╗
   █████╔╝ ██║██║     ██║     █████╗  ██████╔╝
@@ -22,19 +22,19 @@ Interactive CLI tool to find and kill processes by port. Built with [React Ink](
 ## Install
 
 ```bash
-npm install -g @walterlow/portkiller
+npm install -g @walterlow/prockiller
 ```
 
 Or run directly with npx:
 
 ```bash
-npx @walterlow/portkiller
+npx @walterlow/prockiller
 ```
 
 ## Usage
 
 ```bash
-portkiller
+prockiller
 ```
 
 1. Enter a port number to scan
@@ -71,8 +71,8 @@ portkiller
 
 ```bash
 # Clone the repo
-git clone https://github.com/walterlow/portkiller.git
-cd portkiller
+git clone https://github.com/walterlow/prockiller.git
+cd prockiller
 
 # Install dependencies
 npm install

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, useInput } from 'ink';
+import { Box, Text, useInput, useStdout } from 'ink';
 import { ProcessInfo } from '../utils/process.js';
 
 interface ProcessTableProps {
@@ -9,7 +9,29 @@ interface ProcessTableProps {
   onKill: () => void;
 }
 
+function calculateColumnWidths(terminalWidth: number) {
+  // Fixed columns: selector (3) + pid (8) + protocol (8) + padding/borders (~6)
+  const fixedWidth = 3 + 8 + 8 + 6;
+  const availableWidth = Math.max(terminalWidth - fixedWidth, 30);
+
+  // Distribute remaining space between name and address
+  // Name gets 40%, address gets 60%
+  const nameWidth = Math.max(Math.floor(availableWidth * 0.4), 10);
+  const addressWidth = Math.max(availableWidth - nameWidth, 12);
+
+  return {
+    pid: 8,
+    name: nameWidth,
+    protocol: 8,
+    address: addressWidth,
+  };
+}
+
 export function ProcessTable({ processes, selectedIndex, onSelect, onKill }: ProcessTableProps) {
+  const { stdout } = useStdout();
+  const terminalWidth = stdout?.columns ?? 80;
+  const colWidths = calculateColumnWidths(terminalWidth);
+
   useInput((input, key) => {
     if (key.upArrow) {
       onSelect(Math.max(0, selectedIndex - 1));
@@ -34,8 +56,6 @@ export function ProcessTable({ processes, selectedIndex, onSelect, onKill }: Pro
       </Box>
     );
   }
-
-  const colWidths = { pid: 8, name: 20, protocol: 8, address: 24 };
 
   return (
     <Box flexDirection="column" marginY={1}>

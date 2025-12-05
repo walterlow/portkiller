@@ -1,36 +1,133 @@
 import React from 'react';
-import { Box, Text } from 'ink';
+import { Box, Text, useStdout } from 'ink';
 
-const ASCII_ART = `
-  ██████╗  ██████╗ ██████╗ ████████╗
-  ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝
-  ██████╔╝██║   ██║██████╔╝   ██║
-  ██╔═══╝ ██║   ██║██╔══██╗   ██║
-  ██║     ╚██████╔╝██║  ██║   ██║
-  ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝
-  ██╗  ██╗██╗██╗     ██╗     ███████╗██████╗
-  ██║ ██╔╝██║██║     ██║     ██╔════╝██╔══██╗
-  █████╔╝ ██║██║     ██║     █████╗  ██████╔╝
-  ██╔═██╗ ██║██║     ██║     ██╔══╝  ██╔══██╗
-  ██║  ██╗██║███████╗███████╗███████╗██║  ██║
-  ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
-`;
+// Each letter as separate array of lines for fixed-width rendering
+const LETTERS: Record<string, string[]> = {
+  P: [
+    '██████╗ ',
+    '██╔══██╗',
+    '██████╔╝',
+    '██╔═══╝ ',
+    '██║     ',
+    '╚═╝     ',
+  ],
+  R: [
+    '██████╗ ',
+    '██╔══██╗',
+    '██████╔╝',
+    '██╔══██╗',
+    '██║  ██║',
+    '╚═╝  ╚═╝',
+  ],
+  O: [
+    ' ██████╗ ',
+    '██╔═══██╗',
+    '██║   ██║',
+    '██║   ██║',
+    '╚██████╔╝',
+    ' ╚═════╝ ',
+  ],
+  C: [
+    ' ██████╗',
+    '██╔════╝',
+    '██║     ',
+    '██║     ',
+    '╚██████╗',
+    ' ╚═════╝',
+  ],
+  K: [
+    '██╗  ██╗',
+    '██║ ██╔╝',
+    '█████╔╝ ',
+    '██╔═██╗ ',
+    '██║  ██╗',
+    '╚═╝  ╚═╝',
+  ],
+  I: [
+    '██╗',
+    '██║',
+    '██║',
+    '██║',
+    '██║',
+    '╚═╝',
+  ],
+  L: [
+    '██╗     ',
+    '██║     ',
+    '██║     ',
+    '██║     ',
+    '███████╗',
+    '╚══════╝',
+  ],
+  E: [
+    '███████╗',
+    '██╔════╝',
+    '█████╗  ',
+    '██╔══╝  ',
+    '███████╗',
+    '╚══════╝',
+  ],
+};
+
+const PROC = ['P', 'R', 'O', 'C'];
+const KILLER = ['K', 'I', 'L', 'L', 'E', 'R'];
 
 const COLORS = ['#ff4500', '#ff6a00', '#ff8c00', '#ffa500', '#ffb732', '#ffcc66'];
 
-export function Banner() {
-  const lines = ASCII_ART.trim().split('\n');
-
+function AsciiWord({ letters }: { letters: string[] }) {
   return (
-    <Box flexDirection="column" marginBottom={1}>
-      {lines.map((line, index) => (
-        <Text key={index} color={COLORS[index % COLORS.length]} bold>
-          {line}
-        </Text>
+    <Box flexDirection="row">
+      {letters.map((letter, colIdx) => (
+        <Box key={colIdx} flexDirection="column">
+          {LETTERS[letter]!.map((line, rowIdx) => (
+            <Text key={rowIdx} color={COLORS[rowIdx % COLORS.length]} bold>
+              {line}
+            </Text>
+          ))}
+        </Box>
       ))}
-      <Box marginTop={1}>
-        <Text dimColor>  Find and kill processes hogging your ports</Text>
+    </Box>
+  );
+}
+
+const MIN_WIDTH_FULL_BANNER = 50;
+const MIN_WIDTH_COMPACT_BANNER = 30;
+
+export function Banner() {
+  const { stdout } = useStdout();
+  const width = stdout?.columns ?? 80;
+
+  // Full ASCII art banner
+  if (width >= MIN_WIDTH_FULL_BANNER) {
+    return (
+      <Box flexDirection="column" marginBottom={1}>
+        <Box marginLeft={2}>
+          <AsciiWord letters={PROC} />
+        </Box>
+        <Box marginLeft={2}>
+          <AsciiWord letters={KILLER} />
+        </Box>
+        <Box marginTop={1}>
+          <Text dimColor>  Find and kill processes hogging your ports</Text>
+        </Box>
       </Box>
+    );
+  }
+
+  // Compact text banner for narrow terminals
+  if (width >= MIN_WIDTH_COMPACT_BANNER) {
+    return (
+      <Box flexDirection="column" marginBottom={1}>
+        <Text color="#ff6a00" bold>PROCKILLER</Text>
+        <Text dimColor>Find and kill processes</Text>
+      </Box>
+    );
+  }
+
+  // Minimal banner for very narrow terminals
+  return (
+    <Box marginBottom={1}>
+      <Text color="#ff6a00" bold>PROCKILLER</Text>
     </Box>
   );
 }
