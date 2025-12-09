@@ -2,22 +2,9 @@
 
 Interactive CLI tool to find and kill processes by port. Built with [React Ink](https://github.com/vadimdemedes/ink).
 
-![prockiller demo](https://img.shields.io/npm/v/@walterlow/prockiller?color=orange&style=flat-square)
+[![npm version](https://img.shields.io/npm/v/@walterlow/prockiller?color=orange&style=flat-square)](https://www.npmjs.com/package/@walterlow/prockiller)
 
-```
-  ██████╗ ██████╗  ██████╗  ██████╗
-  ██╔══██╗██╔══██╗██╔═══██╗██╔════╝
-  ██████╔╝██████╔╝██║   ██║██║
-  ██╔═══╝ ██╔══██╗██║   ██║██║
-  ██║     ██║  ██║╚██████╔╝╚██████╗
-  ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝
-  ██╗  ██╗██╗██╗     ██╗     ███████╗██████╗
-  ██║ ██╔╝██║██║     ██║     ██╔════╝██╔══██╗
-  █████╔╝ ██║██║     ██║     █████╗  ██████╔╝
-  ██╔═██╗ ██║██║     ██║     ██╔══╝  ██╔══██╗
-  ██║  ██╗██║███████╗███████╗███████╗██║  ██║
-  ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
-```
+![prockiller demo](./prockiller.png)
 
 ## Install
 
